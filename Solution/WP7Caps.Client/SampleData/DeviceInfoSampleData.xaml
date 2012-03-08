@@ -1,0 +1,11 @@
+﻿<WinPhoneCaps:DeviceInfo 
+	xmlns:WinPhoneCaps="clr-namespace:WinPhoneCaps;assembly=WinPhoneCaps"
+
+	FirmwareVersion="Aenean aliquam integer"
+	HardwareVersion="Cras vestibulum nam class curabitur"
+	HasKeyboard="True"
+	Manufacturer="Mauris nullam maecenas"
+	Name="Praesent sed aptent"
+	PowerSource="Adipiscing curae"
+	ScreenResolution="Dis quisque"
+	TotalMemory="Auctor duis parturient nunc vestibulum"/>

@@ -1,0 +1,9 @@
+﻿<WinPhoneCaps:NetworkInfo
+	xmlns:WinPhoneCaps="clr-namespace:WinPhoneCaps;assembly=WinPhoneCaps"
+
+	ConnectionType="Telekenetic"
+	IsCellularDataRoamingEnabled="False"
+	IsConnected="True"
+	IsWifiEnabled="False"
+	IsCellularDataEnabled="True"
+	MobileOperator="Maecenas nam sed"/>
