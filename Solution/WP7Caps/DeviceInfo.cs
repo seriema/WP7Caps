@@ -14,9 +14,9 @@ namespace WinPhoneCaps
         public bool HasKeyboard { get; private set; }
         public string Manufacturer { get; private set; }
         public string Name { get; private set; }
-        public string PowerSource { get; private set; }
-        public string ScreenResolution { get; private set; }
-        public string TotalMemory { get; private set; }
+        public PowerSource PowerSource { get; private set; }
+        public Size ScreenResolution { get; private set; }
+        public long TotalMemory { get; private set; }
 
         public void Load()
         {
@@ -25,9 +25,9 @@ namespace WinPhoneCaps
             HasKeyboard = DeviceStatus.IsKeyboardPresent;
             Manufacturer = DeviceStatus.DeviceManufacturer;
             Name = DeviceStatus.DeviceName;
-            PowerSource = DeviceStatus.PowerSource.ToString();
-            ScreenResolution = string.Format("{0}x{1}", Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
-            TotalMemory = string.Format("{0} MB", DeviceStatus.DeviceTotalMemory / 1048576);
+            PowerSource = DeviceStatus.PowerSource;
+            ScreenResolution = new Size(Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+            TotalMemory = DeviceStatus.DeviceTotalMemory;
 
             RaisePropertyChanged("FirmwareVersion");
             RaisePropertyChanged("HardwareVersion");

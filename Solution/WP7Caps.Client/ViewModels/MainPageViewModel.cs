@@ -10,14 +10,14 @@ namespace WinPhoneCaps.Client.ViewModels
     {
         public MainPageViewModel()
         {
-            ComponentsInfo = new ComponentsInfo();
-            DeviceInfo = new DeviceInfo();
-            NetworkInfo = new NetworkInfo();
+            ComponentsInfo = new ComponentsInfoViewModel();
+            DeviceInfo = new DeviceInfoViewModel();
+            NetworkInfo = new NetworkInfoViewModel();
         }
 
-        public ComponentsInfo ComponentsInfo { get; private set; }
-        public DeviceInfo DeviceInfo { get; private set; }
-        public NetworkInfo NetworkInfo { get; private set; }
+        public ComponentsInfoViewModel ComponentsInfo { get; private set; }
+        public DeviceInfoViewModel DeviceInfo { get; private set; }
+        public NetworkInfoViewModel NetworkInfo { get; private set; }
 
         // TODO: Is there a way to get rid of the Dispatcher?
         public void Load(Dispatcher uiThread)

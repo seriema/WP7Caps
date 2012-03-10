@@ -11,12 +11,25 @@ namespace WinPhoneCaps
 {
     public class ComponentsInfo : NotifyPropertyChangedBase
     {
+        // Created this class so lib-user doesn't need to include a reference
+        // to a whole new DLL just to get this info.
+        public class Location
+        {
+            public double Altitude { get; set; }
+            public double Course { get; set; }
+            public bool HasPermission { get; set; }
+            public bool IsUnknown { get; set; }
+            public double Latitude { get; set; }
+            public double Longitude { get; set; }
+            public double Speed { get; set; }
+        }
+
         public ComponentsInfo()
         {
         }
 
-        public string CurrentCameraResolution { get; private set; }
-        public IEnumerable<string> LocationData { get; private set; }
+        public Size CurrentCameraResolution { get; private set; }
+        public Location LocationData { get; private set; }
         public bool IsAccelerometerSupported { get; private set; }
         public bool IsCompassSupported { get; private set; }
         public bool IsFocusAtPointSupported { get; private set; }
@@ -25,8 +38,8 @@ namespace WinPhoneCaps
         public bool IsGyroSupported { get; private set; }
         public bool IsMotionSupported { get; private set; }
         public bool IsMultiResolutionVideoSupported { get; private set; }
-        public IEnumerable<string> SupportedResolutions { get; private set; }
-        public IEnumerable<string> PhotoPixelLayout { get; private set; }
+        public IEnumerable<Size> SupportedResolutions { get; private set; }
+        public YCbCrPixelLayout PhotoPixelLayout { get; private set; }
 
         GeoCoordinateWatcher watcher;
         PhotoCamera camera;
@@ -56,11 +69,11 @@ namespace WinPhoneCaps
 
         void CollectCameraCaps(object sender, CameraOperationCompletedEventArgs e)
         {
-            SupportedResolutions = GetSupportedResolution(camera.AvailableResolutions);
+            SupportedResolutions = camera.AvailableResolutions;
             IsFocusAtPointSupported = camera.IsFocusAtPointSupported;
             IsFocusSupported = camera.IsFocusSupported;
-            CurrentCameraResolution = SizeAsString(camera.Resolution);
-            PhotoPixelLayout = GetPixelLayoutString(camera.YCbCrPixelLayout);
+            CurrentCameraResolution = camera.Resolution;
+            PhotoPixelLayout = camera.YCbCrPixelLayout;
 
             uiThread.BeginInvoke(delegate()
             {
@@ -76,22 +89,16 @@ namespace WinPhoneCaps
 
         void CollectLocationData(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
         {
-            var locationData = new List<string>();
-
-            if (e.Position.Location.IsUnknown)
+            LocationData = new Location
             {
-                locationData.Add("Location unknown");
-            }
-            else
-            {
-                locationData.Add("Latitude: " + DoubleAsFriendlyString(e.Position.Location.Latitude));
-                locationData.Add("Longitude: " + DoubleAsFriendlyString(e.Position.Location.Longitude));
-                locationData.Add("Altitude: " + DoubleAsFriendlyString(e.Position.Location.Altitude));
-                locationData.Add("Course: " + DoubleAsFriendlyString(e.Position.Location.Course));
-                locationData.Add("Speed: " + DoubleAsFriendlyString(e.Position.Location.Speed));
-            }
-
-            LocationData = locationData;
+                Altitude = e.Position.Location.Altitude,
+                Course = e.Position.Location.Course,
+                HasPermission = true,
+                IsUnknown = e.Position.Location.IsUnknown,
+                Latitude = e.Position.Location.Latitude,
+                Longitude = e.Position.Location.Longitude,
+                Speed = e.Position.Location.Speed
+            };
             uiThread.BeginInvoke(delegate()
             {
                 RaisePropertyChanged("LocationData");
@@ -115,7 +122,7 @@ namespace WinPhoneCaps
 
             if (watcher.Permission == GeoPositionPermission.Denied)
             {
-                LocationData = new[] { "Permission denied by user" };
+                LocationData = new Location { HasPermission = false };
                 RaisePropertyChanged("LocationData");
             }
             else
@@ -145,40 +152,6 @@ namespace WinPhoneCaps
                 watcher.Dispose();
                 watcher = null;
             }
-        }
-
-        static string DoubleAsFriendlyString(double d)
-        {
-            return double.IsNaN(d) ? "Not available" : d.ToString();
-        }
-
-        static IEnumerable<string> GetPixelLayoutString(YCbCrPixelLayout yCbCrPixelLayout)
-        {
-            var pixelLayout = new List<string>();
-
-            pixelLayout.Add("Cb Offset: " + yCbCrPixelLayout.CbOffset);
-            pixelLayout.Add("Cb Pitch: " + yCbCrPixelLayout.CbPitch);
-            pixelLayout.Add("Cb X Pitch: " + yCbCrPixelLayout.CbXPitch);
-            pixelLayout.Add("Cr Offset: " + yCbCrPixelLayout.CrOffset);
-            pixelLayout.Add("Cr Pitch: " + yCbCrPixelLayout.CrPitch);
-            pixelLayout.Add("Cr X Pitch: " + yCbCrPixelLayout.CrXPitch);
-
-            return pixelLayout;
-        }
-
-        static IEnumerable<string> GetSupportedResolution(IEnumerable<Size> availableResolutions)
-        {
-            var resolutions = new List<string>();
-
-            foreach (var resolution in availableResolutions)
-                resolutions.Add(SizeAsString(resolution));
-
-            return resolutions;
-        }
-
-        static string SizeAsString(Size resolution)
-        {
-            return string.Format("{0}x{1}", resolution.Width, resolution.Height);
         }
     }
 }
