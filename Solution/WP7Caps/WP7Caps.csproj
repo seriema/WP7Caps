@@ -52,6 +52,7 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CameraInfo.cs" />
     <Compile Include="ComponentsInfo.cs" />
     <Compile Include="DeviceInfo.cs" />
     <Compile Include="NetworkInfo.cs" />

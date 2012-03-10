@@ -206,13 +206,6 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <TextBlock
@@ -263,77 +256,10 @@
                             Grid.Row="4"
                             Grid.Column="1" />
 
-                        <TextBlock
-                            Text="Front Facing Camera Support:"
+                        <StackPanel
+                            Grid.ColumnSpan="2"
+                            Orientation="Vertical"
                             Grid.Row="5"
-                            Grid.Column="0" />
-                        <CheckBox
-                            IsChecked="{Binding IsFrontFacingCameraSupported}"
-                            IsEnabled="False"
-                            Grid.Row="5"
-                            Grid.Column="1" />
-
-                        <TextBlock
-                            Text="Camera Focus-At-Point Support:"
-                            Grid.Row="6"
-                            Grid.Column="0" />
-                        <CheckBox
-                            IsChecked="{Binding IsFocusAtPointSupported}"
-                            IsEnabled="False"
-                            Grid.Row="6"
-                            Grid.Column="1" />
-
-                        <TextBlock
-                            Text="Camera Focus Support:"
-                            Grid.Row="7"
-                            Grid.Column="0" />
-                        <CheckBox
-                            IsChecked="{Binding IsFocusSupported}"
-                            IsEnabled="False"
-                            Grid.Row="7"
-                            Grid.Column="1" />
-
-                        <StackPanel
-                            Grid.ColumnSpan="2"
-                            Grid.Row="8"
-                            d:LayoutOverrides="Width">
-                            <TextBlock
-                                Text="Current Camera Resolution:" />
-                            <TextBlock
-                                Text="{Binding CurrentCameraResolution}"
-                                Margin="0,0,0,12" />
-                        </StackPanel>
-
-                        <StackPanel
-                            Grid.ColumnSpan="2"
-                            Orientation="Vertical"
-                            Grid.Row="9"
-                            d:LayoutOverrides="Height">
-                            <TextBlock
-                                Text="Supported Camera Resolutions:" />
-                            <ListBox
-                                ItemsSource="{Binding SupportedResolutions}"
-                                HorizontalAlignment="Left"
-                                Margin="0,0,0,12" />
-                        </StackPanel>
-
-                        <StackPanel
-                            Grid.ColumnSpan="2"
-                            Orientation="Vertical"
-                            Grid.Row="10"
-                            d:LayoutOverrides="Height">
-                            <TextBlock
-                                Text="Photo Pixel Layout:" />
-                            <ListBox
-                                ItemsSource="{Binding PhotoPixelLayout}"
-                                HorizontalAlignment="Left"
-                                Margin="0,0,0,12" />
-                        </StackPanel>
-
-                        <StackPanel
-                            Grid.ColumnSpan="2"
-                            Orientation="Vertical"
-                            Grid.Row="11"
                             d:LayoutOverrides="Height">
                             <TextBlock
                                 Text="Location Data:" />
@@ -346,6 +272,97 @@
                     </Grid>
                 </ScrollViewer>
             </controls:PanoramaItem>
+			
+			<controls:PanoramaItem
+				x:Name="Camera"
+                Header="camera"
+                DataContext="{Binding CameraInfo}"
+				d:DataContext="{d:DesignData /SampleData/ComponentsInfoSampleData.xaml}" >
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Text="Front Facing Camera Support:"
+                            Grid.Row="0"
+                            Grid.Column="0" />
+                        <CheckBox
+                            IsChecked="{Binding IsFrontFacingCameraSupported}"
+                            IsEnabled="False"
+                            Grid.Row="0"
+                            Grid.Column="1" />
+
+                        <TextBlock
+                            Text="Camera Focus-At-Point Support:"
+                            Grid.Row="1"
+                            Grid.Column="0" />
+                        <CheckBox
+                            IsChecked="{Binding IsFocusAtPointSupported}"
+                            IsEnabled="False"
+                            Grid.Row="1"
+                            Grid.Column="1" />
+
+                        <TextBlock
+                            Text="Camera Focus Support:"
+                            Grid.Row="2"
+                            Grid.Column="0" />
+                        <CheckBox
+                            IsChecked="{Binding IsFocusSupported}"
+                            IsEnabled="False"
+                            Grid.Row="2"
+                            Grid.Column="1" />
+
+                        <StackPanel
+                            Grid.ColumnSpan="2"
+                            Grid.Row="3"
+                            d:LayoutOverrides="Width">
+                            <TextBlock
+                                Text="Current Camera Resolution:" />
+                            <TextBlock
+                                Text="{Binding CurrentCameraResolution}"
+                                Margin="0,0,0,12" />
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.ColumnSpan="2"
+                            Orientation="Vertical"
+                            Grid.Row="4"
+                            d:LayoutOverrides="Height">
+                            <TextBlock
+                                Text="Supported Camera Resolutions:" />
+                            <ListBox
+                                ItemsSource="{Binding SupportedResolutions}"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,12" />
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.ColumnSpan="2"
+                            Orientation="Vertical"
+                            Grid.Row="5"
+                            d:LayoutOverrides="Height">
+                            <TextBlock
+                                Text="Photo Pixel Layout:" />
+                            <ListBox
+                                ItemsSource="{Binding PhotoPixelLayout}"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,12" />
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+			</controls:PanoramaItem>
         </controls:Panorama>
     </Grid>
 

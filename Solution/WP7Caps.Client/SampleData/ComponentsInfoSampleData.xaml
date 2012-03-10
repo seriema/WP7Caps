@@ -2,12 +2,8 @@
 	xmlns:WinPhoneCaps="clr-namespace:WinPhoneCaps;assembly=WinPhoneCaps" 
 	xmlns:System="clr-namespace:System;assembly=mscorlib"
 
-	CurrentCameraResolution="1000x1000"
 	IsAccelerometerSupported="True"
 	IsCompassSupported="False"
-	IsFocusAtPointSupported="False"
-	IsFocusSupported="True"
-	IsFrontFacingCameraSupported="True"
 	IsGyroSupported="True" 
 	IsMotionSupported="False" 
 	IsMultiResolutionVideoSupported="True">
@@ -23,21 +19,4 @@
 		<System:String>Auctor vestibulum leo</System:String>
 		<System:String>Adipiscing dictumst eleifend mus</System:String>
 	</WinPhoneCaps:ComponentsInfo.LocationData>
-	<WinPhoneCaps:ComponentsInfo.SupportedResolutions>
-		<System:String>Adipiscing conubia parturient interdum</System:String>
-		<System:String>Cubilia lobortis</System:String>
-		<System:String>Nascetur per</System:String>
-		<System:String>Dapibus pharetra</System:String>
-		<System:String>Vestibulum luctus hendrerit egestas</System:String>
-		<System:String>Placerat augue</System:String>
-		<System:String>Eget dolor vestibulum magnis sed</System:String>
-		<System:String>Sem mattis fames</System:String>
-		<System:String>Adipiscing felis</System:String>
-		<System:String>Himenaeos pulvinar elit sagittis</System:String>
-	</WinPhoneCaps:ComponentsInfo.SupportedResolutions>
-	<WinPhoneCaps:ComponentsInfo.PhotoPixelLayout>
-		<System:String>Sem mattis fames</System:String>
-		<System:String>Adipiscing felis</System:String>
-		<System:String>Himenaeos pulvinar elit sagittis</System:String>
-	</WinPhoneCaps:ComponentsInfo.PhotoPixelLayout>
 </WinPhoneCaps:ComponentsInfo>

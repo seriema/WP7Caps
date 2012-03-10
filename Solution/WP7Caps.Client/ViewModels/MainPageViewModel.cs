@@ -10,11 +10,13 @@ namespace WinPhoneCaps.Client.ViewModels
     {
         public MainPageViewModel()
         {
+            CameraInfo = new CameraInfoViewModel();
             ComponentsInfo = new ComponentsInfoViewModel();
             DeviceInfo = new DeviceInfoViewModel();
             NetworkInfo = new NetworkInfoViewModel();
         }
 
+        public CameraInfoViewModel CameraInfo { get; set; }
         public ComponentsInfoViewModel ComponentsInfo { get; private set; }
         public DeviceInfoViewModel DeviceInfo { get; private set; }
         public NetworkInfoViewModel NetworkInfo { get; private set; }
@@ -62,16 +64,24 @@ namespace WinPhoneCaps.Client.ViewModels
             data.AppendLine();
 
             var comp = ComponentsInfo;
-            data.AppendLine("[Capabilities]");
+            data.AppendLine("[Components]");
             data.AppendLine("Supports gyroscope: " + comp.IsGyroSupported);
             data.AppendLine("Supports accelerometer: " + comp.IsAccelerometerSupported);
             data.AppendLine("Supports compass: " + comp.IsCompassSupported);
             data.AppendLine("Supports motion: " + comp.IsMotionSupported);
             data.AppendLine("Supports multi-resolution video: " + comp.IsMultiResolutionVideoSupported);
-            data.AppendLine("Supported camera resolutions: " + StringCollectionToString(comp.SupportedResolutions));
-            data.AppendLine("Supports front facing camera: " + comp.IsFrontFacingCameraSupported);
             data.AppendLine("Location data: " + StringCollectionToString(comp.LocationData));
             data.AppendLine();
+
+            var cam = CameraInfo;
+            data.AppendLine("[Camera]");
+            data.AppendLine("Supported camera resolutions: " + StringCollectionToString(cam.SupportedResolutions));
+            data.AppendLine("Supports front facing camera: " + cam.IsFrontFacingCameraSupported);
+            data.AppendLine("Current camera resolution: " + cam.CurrentCameraResolution);
+            data.AppendLine("Supports focus-at-point: " + cam.IsFocusAtPointSupported);
+            data.AppendLine("Supports focus: " + cam.IsFocusSupported);
+            data.AppendLine("Has front facing camera: " + cam.IsFrontFacingCameraSupported);
+            data.AppendLine("Photo pixel layout: " + StringCollectionToString(cam.PhotoPixelLayout));
 
             return data.ToString();
         }
