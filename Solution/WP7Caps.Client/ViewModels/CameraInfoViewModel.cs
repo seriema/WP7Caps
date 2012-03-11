@@ -33,21 +33,21 @@ namespace WinPhoneCaps.Client.ViewModels
             PhotoPixelLayout = GetPixelLayoutStrings(cam.PhotoPixelLayout);
         }
 
-        static IEnumerable<string> GetPixelLayoutStrings(YCbCrPixelLayout yCbCrPixelLayout)
+        private static IEnumerable<string> GetPixelLayoutStrings(YCbCrPixelLayout pixelLayout)
         {
-            var pixelLayout = new List<string>();
+            var strings = new List<string>();
 
-            pixelLayout.Add("Cb Offset: " + yCbCrPixelLayout.CbOffset);
-            pixelLayout.Add("Cb Pitch: " + yCbCrPixelLayout.CbPitch);
-            pixelLayout.Add("Cb X Pitch: " + yCbCrPixelLayout.CbXPitch);
-            pixelLayout.Add("Cr Offset: " + yCbCrPixelLayout.CrOffset);
-            pixelLayout.Add("Cr Pitch: " + yCbCrPixelLayout.CrPitch);
-            pixelLayout.Add("Cr X Pitch: " + yCbCrPixelLayout.CrXPitch);
+            strings.Add("Cb Offset: " + pixelLayout.CbOffset);
+            strings.Add("Cb Pitch: " + pixelLayout.CbPitch);
+            strings.Add("Cb X Pitch: " + pixelLayout.CbXPitch);
+            strings.Add("Cr Offset: " + pixelLayout.CrOffset);
+            strings.Add("Cr Pitch: " + pixelLayout.CrPitch);
+            strings.Add("Cr X Pitch: " + pixelLayout.CrXPitch);
 
-            return pixelLayout;
+            return strings;
         }
 
-        static IEnumerable<string> GetSupportedResolutions(IEnumerable<Size> availableResolutions)
+        private static IEnumerable<string> GetSupportedResolutions(IEnumerable<Size> availableResolutions)
         {
             var resolutions = new List<string>();
 
@@ -57,7 +57,7 @@ namespace WinPhoneCaps.Client.ViewModels
             return resolutions;
         }
 
-        static string SizeAsString(Size resolution)
+        private static string SizeAsString(Size resolution)
         {
             return string.Format("{0}x{1}", resolution.Width, resolution.Height);
         }

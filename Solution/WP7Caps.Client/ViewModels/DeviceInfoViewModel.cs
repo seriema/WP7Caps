@@ -26,7 +26,7 @@
             Manufacturer = device.Manufacturer;
             Name = device.Name;
             PowerSource = device.PowerSource.ToString();
-            ScreenResolution = string.Format("{0}x{1}", device.ScreenResolution.Width, device.ScreenResolution.Height); ;
+            ScreenResolution = string.Format("{0}x{1}", device.ScreenResolution.Width, device.ScreenResolution.Height);
             TotalMemory = string.Format("{0} MB", device.TotalMemory / 1048576);
         }
     }

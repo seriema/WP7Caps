@@ -33,12 +33,12 @@ namespace WinPhoneCaps.Client.ViewModels
             LocationData = GetLocationStrings(comp.LocationData);
         }
 
-        static string DoubleAsFriendlyString(double d)
+        private static string DoubleAsFriendlyString(double d)
         {
             return double.IsNaN(d) ? "Not available" : d.ToString();
         }
 
-        static IEnumerable<string> GetLocationStrings(ComponentsInfo.Location location)
+        private static IEnumerable<string> GetLocationStrings(ComponentsInfo.Location location)
         {
             // HACK: Temporary copout :)
             if (location == null)

@@ -18,12 +18,6 @@ namespace WinPhoneCaps.Client
     public partial class App : Application
     {
         /// <summary>
-        /// Provides easy access to the root frame of the Phone Application.
-        /// </summary>
-        /// <returns>The root frame of the Phone Application.</returns>
-        public PhoneApplicationFrame RootFrame { get; private set; }
-
-        /// <summary>
         /// Constructor for the Application object.
         /// </summary>
         public App()
@@ -58,6 +52,12 @@ namespace WinPhoneCaps.Client
             }
 
         }
+
+        /// <summary>
+        /// Provides easy access to the root frame of the Phone Application.
+        /// </summary>
+        /// <returns>The root frame of the Phone Application.</returns>
+        public PhoneApplicationFrame RootFrame { get; private set; }
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated

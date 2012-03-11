@@ -40,7 +40,7 @@ namespace WinPhoneCaps.Client.ViewModels
                 MobileOperator = "N/A";
         }
 
-        static string GetInterfaceTypeString(NetworkInterfaceType networkInterfaceType)
+        private static string GetInterfaceTypeString(NetworkInterfaceType networkInterfaceType)
         {
             switch (networkInterfaceType)
             {

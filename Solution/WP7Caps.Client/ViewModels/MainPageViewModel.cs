@@ -37,7 +37,15 @@ namespace WinPhoneCaps.Client.ViewModels
             email.Show();
 		}
 
-        string PhoneDataToString()
+        private static string StringCollectionToString(IEnumerable<string> collection)
+        {
+            if (collection == null || collection.Count() == 0)
+                return "No data";
+
+            return string.Join(", ", collection);
+        }
+        
+        private string PhoneDataToString()
         {
             var data = new StringBuilder();
 
@@ -84,14 +92,6 @@ namespace WinPhoneCaps.Client.ViewModels
             data.AppendLine("Photo pixel layout: " + StringCollectionToString(cam.PhotoPixelLayout));
 
             return data.ToString();
-        }
-
-        static string StringCollectionToString(IEnumerable<string> collection)
-        {
-            if (collection == null || collection.Count() == 0)
-                return "No data";
-
-            return string.Join(", ", collection);
         }
     }
 }

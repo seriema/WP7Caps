@@ -14,7 +14,7 @@ namespace WinPhoneCaps.Client
         private void Email_Click(object sender, System.EventArgs e)
         {
 			var vm = DataContext as MainPageViewModel;
-			if(vm != null)
+			if (vm != null)
 				vm.EmailData();
         }
 
