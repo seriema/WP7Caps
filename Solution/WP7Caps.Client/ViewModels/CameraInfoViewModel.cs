@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Devices;
+using System.Globalization;
 
 namespace WinPhoneCaps.Client.ViewModels
 {
@@ -59,7 +60,7 @@ namespace WinPhoneCaps.Client.ViewModels
 
         private static string SizeAsString(Size resolution)
         {
-            return string.Format("{0}x{1}", resolution.Width, resolution.Height);
+            return string.Format(CultureInfo.InvariantCulture, "{0}x{1}", resolution.Width, resolution.Height);
         }
     }
 }

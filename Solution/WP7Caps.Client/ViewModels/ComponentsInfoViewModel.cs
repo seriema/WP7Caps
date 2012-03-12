@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Devices;
+using System.Globalization;
 
 namespace WinPhoneCaps.Client.ViewModels
 {
@@ -35,7 +36,7 @@ namespace WinPhoneCaps.Client.ViewModels
 
         private static string DoubleAsFriendlyString(double d)
         {
-            return double.IsNaN(d) ? "Not available" : d.ToString();
+            return double.IsNaN(d) ? "Not available" : d.ToString(CultureInfo.InvariantCulture);
         }
 
         private static IEnumerable<string> GetLocationStrings(ComponentsInfo.Location location)
