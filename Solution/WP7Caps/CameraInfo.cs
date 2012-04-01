@@ -48,13 +48,18 @@ namespace WinPhoneCaps
             UninitializeCamera();
         }
 
-        void SetCameraData()
+        void InitializeCamera()
         {
             // Camera resolution data gathering requires the camera to be initialized
             camera = new PhotoCamera(CameraType.Primary);
             camera.Initialized += CollectCameraCaps;
             var dummyBrush = new VideoBrush();
             dummyBrush.SetSource(camera); // Needed for the camera.Initialized event to fire.
+        }
+
+        void SetCameraData()
+        {
+            InitializeCamera();
         }
 
         void UninitializeCamera()
