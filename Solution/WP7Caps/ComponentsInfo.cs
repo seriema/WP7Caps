@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Device.Location;
-using System.Windows;
-using System.Windows.Media;
 using System.Windows.Threading;
-using Microsoft.Devices;
 using Microsoft.Devices.Sensors;
 using Microsoft.Phone.Info;
 
@@ -35,8 +32,8 @@ namespace WinPhoneCaps
         public bool IsMotionSupported { get; private set; }
         public bool IsMultiResolutionVideoSupported { get; private set; }
 
-        GeoCoordinateWatcher watcher;
         Dispatcher uiThread;
+        GeoCoordinateWatcher watcher;
 
         public void Load(Dispatcher uiThread)
         {
@@ -57,27 +54,7 @@ namespace WinPhoneCaps
             SetLocationData();
         }
 
-        void CollectLocationData(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
-        {
-            LocationData = new Location
-            {
-                Altitude = e.Position.Location.Altitude,
-                Course = e.Position.Location.Course,
-                HasPermission = true,
-                IsUnknown = e.Position.Location.IsUnknown,
-                Latitude = e.Position.Location.Latitude,
-                Longitude = e.Position.Location.Longitude,
-                Speed = e.Position.Location.Speed
-            };
-            uiThread.BeginInvoke(delegate()
-            {
-                RaisePropertyChanged("LocationData");
-            });
-
-            UninitializeGeoCoordinateWatcher();
-        }
-
-        void SetLocationData()
+        bool InitializeGeoCoordinateWatcher()
         {
             watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
 
@@ -85,13 +62,36 @@ namespace WinPhoneCaps
             {
                 LocationData = new Location { HasPermission = false };
                 RaisePropertyChanged("LocationData");
-            }
-            else
+                return false;
+            };
+
+            watcher.MovementThreshold = 0;
+            watcher.TryStart(false, TimeSpan.FromMilliseconds(1000));
+
+            return true;
+        }
+
+        void SetLocationData()
+        {
+            if (!InitializeGeoCoordinateWatcher())
+                return;
+
+            LocationData = new Location
             {
-                watcher.MovementThreshold = 1;
-                watcher.PositionChanged += CollectLocationData;
-                watcher.Start();
-            }
+                Altitude = watcher.Position.Location.Altitude,
+                Course = watcher.Position.Location.Course,
+                HasPermission = true,
+                IsUnknown = watcher.Position.Location.IsUnknown,
+                Latitude = watcher.Position.Location.Latitude,
+                Longitude = watcher.Position.Location.Longitude,
+                Speed = watcher.Position.Location.Speed
+            };
+            uiThread.BeginInvoke(delegate
+            {
+                RaisePropertyChanged("LocationData");
+            });
+
+            UninitializeGeoCoordinateWatcher();
         }
 
         void UninitializeGeoCoordinateWatcher()
@@ -99,7 +99,6 @@ namespace WinPhoneCaps
             if (watcher != null)
             {
                 watcher.Stop();
-                watcher.PositionChanged -= CollectLocationData;
                 watcher.Dispose();
                 watcher = null;
             }
