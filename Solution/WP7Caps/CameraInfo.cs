@@ -8,6 +8,9 @@ namespace WinPhoneCaps
 {
 	public class CameraInfo : NotifyPropertyChangedBase
 	{
+		PhotoCamera camera;
+		Dispatcher uiThread;
+		
 		public Size CurrentCameraResolution { get; private set; }
 		public bool IsFocusAtPointSupported { get; private set; }
 		public bool IsFocusSupported { get; private set; }
@@ -25,9 +28,6 @@ namespace WinPhoneCaps
 			SetCameraData();
 		}
 
-		PhotoCamera camera;
-		Dispatcher uiThread;
-
 		void CollectCameraCaps(object sender, CameraOperationCompletedEventArgs e)
 		{
 			SupportedResolutions = camera.AvailableResolutions;
@@ -36,7 +36,7 @@ namespace WinPhoneCaps
 			CurrentCameraResolution = camera.Resolution;
 			PhotoPixelLayout = camera.YCbCrPixelLayout;
 
-			uiThread.BeginInvoke(delegate()
+			uiThread.BeginInvoke(delegate
 			{
 				RaisePropertyChanged("SupportedResolutions");
 				RaisePropertyChanged("IsFocusAtPointSupported");

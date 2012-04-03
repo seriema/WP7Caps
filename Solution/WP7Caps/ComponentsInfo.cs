@@ -8,18 +8,8 @@ namespace WinPhoneCaps
 {
 	public class ComponentsInfo : NotifyPropertyChangedBase
 	{
-		// Created this class so lib-user doesn't need to include a reference
-		// to a whole new DLL just to get this info.
-		public class Location
-		{
-			public double Altitude { get; set; }
-			public double Course { get; set; }
-			public bool HasPermission { get; set; }
-			public bool IsUnknown { get; set; }
-			public double Latitude { get; set; }
-			public double Longitude { get; set; }
-			public double Speed { get; set; }
-		}
+		Dispatcher uiThread;
+		GeoCoordinateWatcher watcher;
 
 		public ComponentsInfo()
 		{
@@ -32,8 +22,18 @@ namespace WinPhoneCaps
 		public bool IsMotionSupported { get; private set; }
 		public bool IsMultiResolutionVideoSupported { get; private set; }
 
-		Dispatcher uiThread;
-		GeoCoordinateWatcher watcher;
+		// Created this class so lib-user doesn't need to include a reference
+		// to a whole new DLL just to get this info.
+		public class Location
+		{
+			public double Altitude { get; set; }
+			public double Course { get; set; }
+			public bool HasPermission { get; set; }
+			public bool IsUnknown { get; set; }
+			public double Latitude { get; set; }
+			public double Longitude { get; set; }
+			public double Speed { get; set; }
+		}
 
 		public void Load(Dispatcher uiThread)
 		{
@@ -63,7 +63,7 @@ namespace WinPhoneCaps
 				LocationData = new Location { HasPermission = false };
 				RaisePropertyChanged("LocationData");
 				return false;
-			};
+			}
 
 			watcher.MovementThreshold = 0;
 			watcher.TryStart(false, TimeSpan.FromMilliseconds(1000));
