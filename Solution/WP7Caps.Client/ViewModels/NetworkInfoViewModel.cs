@@ -6,6 +6,16 @@ namespace WinPhoneCaps.Client.ViewModels
 	{
 		public NetworkInfoViewModel()
 		{
+			var net = new NetworkInfo();
+
+			ConnectionType = GetInterfaceTypeString(net.ConnectionType);
+			IsCellularDataEnabled = net.IsCellularDataEnabled;
+			IsCellularDataRoamingEnabled = net.IsCellularDataRoamingEnabled;
+			IsConnected = net.IsConnected;
+			IsWifiEnabled = net.IsWifiEnabled;
+			MobileOperator = net.MobileOperator;
+			if (string.IsNullOrEmpty(MobileOperator))
+				MobileOperator = "N/A";
 		}
 
 		public string ConnectionType { get; private set; }
@@ -17,17 +27,6 @@ namespace WinPhoneCaps.Client.ViewModels
 
 		public void Load()
 		{
-			var net = new NetworkInfo();
-			net.Load();
-
-			ConnectionType = GetInterfaceTypeString(net.ConnectionType);
-			IsCellularDataEnabled = net.IsCellularDataEnabled;
-			IsCellularDataRoamingEnabled = net.IsCellularDataRoamingEnabled;
-			IsConnected = net.IsConnected;
-			IsWifiEnabled = net.IsWifiEnabled;
-			MobileOperator = net.MobileOperator;
-			if (string.IsNullOrEmpty(MobileOperator))
-				MobileOperator = "N/A";
 		}
 
 		private static string GetInterfaceTypeString(NetworkInterfaceType networkInterfaceType)

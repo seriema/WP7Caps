@@ -2,34 +2,13 @@
 
 namespace WinPhoneCaps
 {
-	public class NetworkInfo : NotifyPropertyChangedBase
+	public class NetworkInfo
 	{
-		public NetworkInfo()
-		{
-		}
-
-		public NetworkInterfaceType ConnectionType { get; private set; }
-		public bool IsCellularDataEnabled { get; private set; }
-		public bool IsCellularDataRoamingEnabled { get; private set; }
-		public bool IsConnected { get; private set; }
-		public bool IsWifiEnabled { get; private set; }
-		public string MobileOperator { get; private set; }
-
-		public void Load()
-		{
-			ConnectionType = NetworkInterface.NetworkInterfaceType;
-			IsCellularDataEnabled = DeviceNetworkInformation.IsCellularDataEnabled;
-			IsCellularDataRoamingEnabled = DeviceNetworkInformation.IsCellularDataRoamingEnabled;
-			IsConnected = DeviceNetworkInformation.IsNetworkAvailable;
-			IsWifiEnabled = DeviceNetworkInformation.IsWiFiEnabled;
-			MobileOperator = DeviceNetworkInformation.CellularMobileOperator;
-
-			RaisePropertyChanged("ConnectionType");
-			RaisePropertyChanged("IsCellularDataEnabled");
-			RaisePropertyChanged("IsCellularDataRoamingEnabled");
-			RaisePropertyChanged("IsConnected");
-			RaisePropertyChanged("IsWifiEnabled");
-			RaisePropertyChanged("MobileOperator");
-		}
+		public NetworkInterfaceType ConnectionType { get { return NetworkInterface.NetworkInterfaceType; } }
+		public bool IsCellularDataEnabled          { get { return DeviceNetworkInformation.IsCellularDataEnabled; } }
+		public bool IsCellularDataRoamingEnabled   { get { return DeviceNetworkInformation.IsNetworkAvailable; } }
+		public bool IsConnected                    { get { return DeviceNetworkInformation.IsNetworkAvailable; } }
+		public bool IsWifiEnabled                  { get { return DeviceNetworkInformation.IsWiFiEnabled; } }
+		public string MobileOperator               { get { return DeviceNetworkInformation.CellularMobileOperator; } }
 	}
 }
