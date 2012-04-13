@@ -6,14 +6,12 @@ namespace WinPhoneCaps.Client.ViewModels
 	{
 		public NetworkInfoViewModel()
 		{
-			var net = new NetworkInfo();
-
-			ConnectionType = GetInterfaceTypeString(net.ConnectionType);
-			IsCellularDataEnabled = net.IsCellularDataEnabled;
-			IsCellularDataRoamingEnabled = net.IsCellularDataRoamingEnabled;
-			IsConnected = net.IsConnected;
-			IsWifiEnabled = net.IsWifiEnabled;
-			MobileOperator = net.MobileOperator;
+			ConnectionType = GetInterfaceTypeString(NetworkInfo.ConnectionType);
+			IsCellularDataEnabled = NetworkInfo.IsCellularDataEnabled;
+			IsCellularDataRoamingEnabled = NetworkInfo.IsCellularDataRoamingEnabled;
+			IsConnected = NetworkInfo.IsConnected;
+			IsWifiEnabled = NetworkInfo.IsWifiEnabled;
+			MobileOperator = NetworkInfo.MobileOperator;
 			if (string.IsNullOrEmpty(MobileOperator))
 				MobileOperator = "N/A";
 		}
