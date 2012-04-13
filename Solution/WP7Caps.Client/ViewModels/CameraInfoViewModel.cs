@@ -24,7 +24,7 @@ namespace WinPhoneCaps.Client.ViewModels
 			var cam = new CameraInfo();
 			cam.Load(uiThread);
 
-			IsFrontFacingCameraSupported = cam.IsFrontFacingCameraSupported;
+			IsFrontFacingCameraSupported = CameraInfo.IsFrontFacingCameraSupported;
 
 			// Have to wait for event to kick off
 			SupportedResolutions = GetSupportedResolutions(cam.SupportedResolutions);

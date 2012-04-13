@@ -10,20 +10,20 @@ namespace WinPhoneCaps
 	{
 		PhotoCamera camera;
 		Dispatcher uiThread;
-		
+
+		public static bool IsFrontFacingCameraSupported { get { return Camera.IsCameraTypeSupported(CameraType.FrontFacing); } }
+
 		public Size CurrentCameraResolution { get; private set; }
 		public bool IsFocusAtPointSupported { get; private set; }
 		public bool IsFocusSupported { get; private set; }
-		public bool IsFrontFacingCameraSupported { get; private set; }
 		public IEnumerable<Size> SupportedResolutions { get; private set; }
 		public YCbCrPixelLayout PhotoPixelLayout { get; private set; }
+
+		// TODO: Do a IsStandardCameraSupported
 
 		public void Load(Dispatcher uiThread)
 		{
 			this.uiThread = uiThread;
-
-			IsFrontFacingCameraSupported = Camera.IsCameraTypeSupported(CameraType.FrontFacing);
-			RaisePropertyChanged("IsFrontFacingCameraSupported");
 
 			SetCameraData();
 		}
