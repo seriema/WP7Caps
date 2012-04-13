@@ -9,34 +9,28 @@ namespace WinPhoneCaps
 		{
 		}
 
-		public string FirmwareVersion { get; private set; }
-		public string HardwareVersion { get; private set; }
-		public bool HasKeyboard { get; private set; }
-		public string Manufacturer { get; private set; }
-		public string Name { get; private set; }
-		public PowerSource PowerSource { get; private set; }
+		public static string FirmwareVersion { get { return DeviceStatus.DeviceFirmwareVersion; } }
+		public static string HardwareVersion { get { return DeviceStatus.DeviceHardwareVersion; } }
+		public static bool HasKeyboard { get { return DeviceStatus.IsKeyboardPresent; } }
+		public static string Manufacturer { get { return DeviceStatus.DeviceManufacturer; } }
+		public static string Name { get { return DeviceStatus.DeviceName; } }
+		public static PowerSource PowerSource { get { return DeviceStatus.PowerSource; } }
+		public static long TotalMemory { get { return DeviceStatus.DeviceTotalMemory; } }
+
 		public Size ScreenResolution { get; private set; }
-		public long TotalMemory { get; private set; }
+
+		// TODO: Add System.Environment.OSVersion
 
 		public void Load()
 		{
-			FirmwareVersion = DeviceStatus.DeviceFirmwareVersion;
-			HardwareVersion = DeviceStatus.DeviceHardwareVersion;
-			HasKeyboard = DeviceStatus.IsKeyboardPresent;
-			Manufacturer = DeviceStatus.DeviceManufacturer;
-			Name = DeviceStatus.DeviceName;
-			PowerSource = DeviceStatus.PowerSource;
+			// In the early stages of the object lifetime of a Silverlight 
+			// plug-in instance, ActualHeight and ActualWidth do not contain 
+			// usable values. In particular, the plug-in DOM-level OnLoad event 
+			// does not yet guarantee a correct value for ActualHeight and ActualWidth.
+			// In general, you should check these values in the handler for the Resized 
+			// event, which occurs just after OnLoad.
 			ScreenResolution = new Size(Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
-			TotalMemory = DeviceStatus.DeviceTotalMemory;
-
-			RaisePropertyChanged("FirmwareVersion");
-			RaisePropertyChanged("HardwareVersion");
-			RaisePropertyChanged("HasKeyboard");
-			RaisePropertyChanged("Manufacturer");
-			RaisePropertyChanged("Name");
-			RaisePropertyChanged("PowerSource");
 			RaisePropertyChanged("ScreenResolution");
-			RaisePropertyChanged("TotalMemory");
 		}
 	}
 }

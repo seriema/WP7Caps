@@ -22,14 +22,14 @@ namespace WinPhoneCaps.Client.ViewModels
 			var device = new DeviceInfo();
 			device.Load();
 
-			FirmwareVersion = device.FirmwareVersion;
-			HardwareVersion = device.HardwareVersion;
-			HasKeyboard = device.HasKeyboard;
-			Manufacturer = device.Manufacturer;
-			Name = device.Name;
-			PowerSource = device.PowerSource.ToString();
+			FirmwareVersion = DeviceInfo.FirmwareVersion;
+			HardwareVersion = DeviceInfo.HardwareVersion;
+			HasKeyboard = DeviceInfo.HasKeyboard;
+			Manufacturer = DeviceInfo.Manufacturer;
+			Name = DeviceInfo.Name;
+			PowerSource = DeviceInfo.PowerSource.ToString();
 			ScreenResolution = string.Format(CultureInfo.InvariantCulture, "{0}x{1}", device.ScreenResolution.Width, device.ScreenResolution.Height);
-			TotalMemory = string.Format(CultureInfo.InvariantCulture, "{0} MB", device.TotalMemory / 1048576);
+			TotalMemory = string.Format(CultureInfo.InvariantCulture, "{0} MB", DeviceInfo.TotalMemory / 1048576);
 		}
 	}
 }
