@@ -16,8 +16,8 @@ namespace WinPhoneCaps
 		public Size CurrentCameraResolution { get; private set; }
 		public bool IsFocusAtPointSupported { get; private set; }
 		public bool IsFocusSupported { get; private set; }
-		public IEnumerable<Size> SupportedResolutions { get; private set; }
 		public YCbCrPixelLayout PhotoPixelLayout { get; private set; }
+		public IEnumerable<Size> SupportedResolutions { get; private set; }
 
 		// TODO: Do a IsStandardCameraSupported
 
@@ -30,19 +30,19 @@ namespace WinPhoneCaps
 
 		void CollectCameraCaps(object sender, CameraOperationCompletedEventArgs e)
 		{
-			SupportedResolutions = camera.AvailableResolutions;
+			CurrentCameraResolution = camera.Resolution;
 			IsFocusAtPointSupported = camera.IsFocusAtPointSupported;
 			IsFocusSupported = camera.IsFocusSupported;
-			CurrentCameraResolution = camera.Resolution;
 			PhotoPixelLayout = camera.YCbCrPixelLayout;
+			SupportedResolutions = camera.AvailableResolutions;
 
 			uiThread.BeginInvoke(delegate
 			{
-				RaisePropertyChanged("SupportedResolutions");
+				RaisePropertyChanged("CurrentCameraResolution");
 				RaisePropertyChanged("IsFocusAtPointSupported");
 				RaisePropertyChanged("IsFocusSupported");
-				RaisePropertyChanged("CurrentCameraResolution");
 				RaisePropertyChanged("PhotoPixelLayout");
+				RaisePropertyChanged("SupportedResolutions");
 			});
 
 			UninitializeCamera();
