@@ -15,12 +15,13 @@ namespace WinPhoneCaps
 		{
 		}
 
+		public static bool IsAccelerometerSupported { get { return Accelerometer.IsSupported; } }
+		public static bool IsCompassSupported { get { return Compass.IsSupported; } }
+		public static bool IsGyroSupported { get { return Gyroscope.IsSupported; } }
+		public static bool IsMotionSupported { get { return Motion.IsSupported; } }
+		public static bool IsMultiResolutionVideoSupported { get { return MediaCapabilities.IsMultiResolutionVideoSupported; } }
+
 		public Location LocationData { get; private set; }
-		public bool IsAccelerometerSupported { get; private set; }
-		public bool IsCompassSupported { get; private set; }
-		public bool IsGyroSupported { get; private set; }
-		public bool IsMotionSupported { get; private set; }
-		public bool IsMultiResolutionVideoSupported { get; private set; }
 
 		// Created this class so lib-user doesn't need to include a reference
 		// to a whole new DLL just to get this info.
@@ -38,18 +39,6 @@ namespace WinPhoneCaps
 		public void Load(Dispatcher uiThread)
 		{
 			this.uiThread = uiThread;
-
-			IsAccelerometerSupported = Accelerometer.IsSupported;
-			IsCompassSupported = Compass.IsSupported;
-			IsGyroSupported = Gyroscope.IsSupported;
-			IsMotionSupported = Motion.IsSupported;
-			IsMultiResolutionVideoSupported = MediaCapabilities.IsMultiResolutionVideoSupported;
-
-			RaisePropertyChanged("IsAccelerometerSupported");
-			RaisePropertyChanged("IsCompassSupported");
-			RaisePropertyChanged("IsGyroSupported");
-			RaisePropertyChanged("IsMotionSupported");
-			RaisePropertyChanged("IsMultiResolutionVideoSupported");
 
 			SetLocationData();
 		}

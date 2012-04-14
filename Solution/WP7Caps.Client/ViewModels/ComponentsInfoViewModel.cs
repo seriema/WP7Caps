@@ -19,15 +19,14 @@ namespace WinPhoneCaps.Client.ViewModels
 
 		public void Load(Dispatcher uiThread)
 		{
+			IsAccelerometerSupported = ComponentsInfo.IsAccelerometerSupported;
+			IsCompassSupported = ComponentsInfo.IsCompassSupported;
+			IsGyroSupported = ComponentsInfo.IsGyroSupported;
+			IsMotionSupported = ComponentsInfo.IsMotionSupported;
+			IsMultiResolutionVideoSupported = ComponentsInfo.IsMultiResolutionVideoSupported;
+
 			var comp = new ComponentsInfo();
 			comp.Load(uiThread);
-
-			IsAccelerometerSupported = comp.IsAccelerometerSupported;
-			IsCompassSupported = comp.IsCompassSupported;
-			IsGyroSupported = comp.IsGyroSupported;
-			IsMotionSupported = comp.IsMotionSupported;
-			IsMultiResolutionVideoSupported = comp.IsMultiResolutionVideoSupported;
-
 			// Have to wait for event to kick off
 			LocationData = GetLocationStrings(comp.LocationData);
 		}
