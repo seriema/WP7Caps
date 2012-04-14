@@ -75,10 +75,7 @@ namespace WinPhoneCaps
 				Longitude = watcher.Position.Location.Longitude,
 				Speed = watcher.Position.Location.Speed
 			};
-			uiThread.BeginInvoke(delegate
-			{
-				RaisePropertyChanged("LocationData");
-			});
+			uiThread.BeginInvoke(() => RaisePropertyChanged("LocationData"));
 
 			UninitializeGeoCoordinateWatcher();
 		}
