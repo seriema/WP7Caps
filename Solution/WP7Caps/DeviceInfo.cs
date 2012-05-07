@@ -35,7 +35,8 @@ namespace WinPhoneCaps
 		/// <summary>Indicates whether the device is currently running on battery power or is plugged in to an external power supply.</summary>
 		public static PowerSource PowerSource { get { return DeviceStatus.PowerSource; } }
 
-		public static string OsVersion { get { return Environment.OSVersion.ToString(); } }
+		/// <summary>Represents information about an operating system, such as the version and platform identifier.</summary>
+		public static OperatingSystem OsVersion { get { return Environment.OSVersion; } }
 
 		/// <summary>Returns the physical RAM size of the device in bytes.</summary>
 		/// <remarks>The value returned is less than the actual amount of device memory, but can be used to help determine memory consumption requirements.</remarks>

@@ -28,10 +28,10 @@ namespace WinPhoneCaps.Client.ViewModels
 			HasKeyboard = DeviceInfo.HasKeyboard;
 			Manufacturer = DeviceInfo.Manufacturer;
 			Name = DeviceInfo.Name;
-			OsVersion = DeviceInfo.OsVersion;
+			OsVersion = DeviceInfo.OsVersion.ToString();
 			PowerSource = DeviceInfo.PowerSource.ToString();
 			ScreenResolution = string.Format(CultureInfo.InvariantCulture, "{0}x{1}", device.ScreenResolution.Width, device.ScreenResolution.Height);
-			TotalMemory = string.Format(CultureInfo.InvariantCulture, "{0} MB", DeviceInfo.TotalMemory / 1048576);
+			TotalMemory = string.Format(CultureInfo.InvariantCulture, "{0} MB", BytesAsMegaBytes(DeviceInfo.TotalMemory));
 
 			RaisePropertyChanged("FirmwareVersion");
 			RaisePropertyChanged("HardwareVersion");
@@ -42,6 +42,11 @@ namespace WinPhoneCaps.Client.ViewModels
 			RaisePropertyChanged("PowerSource");
 			RaisePropertyChanged("ScreenResolution");
 			RaisePropertyChanged("TotalMemory");
+		}
+
+		private static long BytesAsMegaBytes(long bytes)
+		{
+			return bytes / 1048576;
 		}
 	}
 }
