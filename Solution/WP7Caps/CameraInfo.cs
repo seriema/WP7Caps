@@ -36,7 +36,7 @@ namespace WinPhoneCaps
 			PhotoPixelLayout = camera.YCbCrPixelLayout;
 			SupportedResolutions = camera.AvailableResolutions;
 
-			uiThread.BeginInvoke(delegate
+			uiThread.BeginInvoke( () =>
 			{
 				RaisePropertyChanged("CurrentCameraResolution");
 				RaisePropertyChanged("IsFocusAtPointSupported");
@@ -64,12 +64,12 @@ namespace WinPhoneCaps
 
 		void UninitializeCamera()
 		{
-			if (camera != null)
-			{
-				camera.Initialized -= CollectCameraCaps;
-				camera.Dispose();
-				camera = null;
-			}
+			if (camera == null)
+				return;
+
+			camera.Initialized -= CollectCameraCaps;
+			camera.Dispose();
+			camera = null;
 		}
 	}
 }
