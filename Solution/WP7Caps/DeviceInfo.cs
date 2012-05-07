@@ -8,6 +8,7 @@ namespace WinPhoneCaps
 	/// </summary>
 	public class DeviceInfo : NotifyPropertyChangedBase
 	{
+		/// <summary>Basic constructor added so the class can be used as ViewModel</summary>
 		public DeviceInfo()
 		{
 		}
@@ -38,12 +39,13 @@ namespace WinPhoneCaps
 		public static long TotalMemory { get { return DeviceStatus.DeviceTotalMemory; } }
 
 		/// <summary>Gets the browser-determined width and height of the Silverlight plug-in content area.</summary>
-		/// <returns>The browser-determined width and height, in pixels, of the Silverlight plug-in content area. 
+		/// <returns>The browser-determined width and height, in pixels, of the Silverlight plug-in content area.
 		/// The default value is the width and height of the Silverlight plug-in, as specified by the HTML object element that instantiated it.</returns>
 		public Size ScreenResolution { get; private set; }
 
 		// TODO: Add System.Environment.OSVersion
 
+		/// <summary>Screen resolution can only be found after Resized-event on app.</summary>
 		public void Load()
 		{
 			// In the early stages of the object lifetime of a Silverlight 
