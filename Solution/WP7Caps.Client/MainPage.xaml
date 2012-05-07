@@ -148,11 +148,11 @@
 						<TextBlock
 							Grid.Row="0"
 							Grid.Column="0"
-							Text="Connected to Network:"/>
+							Text="Network available:"/>
 						<CheckBox
 							Grid.Row="0"
 							Grid.Column="1"
-							IsChecked="{Binding IsConnected, Mode=TwoWay}"
+							IsChecked="{Binding IsNetworkAvailable}"
 							IsEnabled="False" />
 						<StackPanel
 							Grid.ColumnSpan="2"
