@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Microsoft.Phone.Info;
 
 namespace WinPhoneCaps
@@ -34,6 +35,8 @@ namespace WinPhoneCaps
 		/// <summary>Indicates whether the device is currently running on battery power or is plugged in to an external power supply.</summary>
 		public static PowerSource PowerSource { get { return DeviceStatus.PowerSource; } }
 
+		public static string OsVersion { get { return Environment.OSVersion.ToString(); } }
+
 		/// <summary>Returns the physical RAM size of the device in bytes.</summary>
 		/// <remarks>The value returned is less than the actual amount of device memory, but can be used to help determine memory consumption requirements.</remarks>
 		public static long TotalMemory { get { return DeviceStatus.DeviceTotalMemory; } }
@@ -43,7 +46,7 @@ namespace WinPhoneCaps
 		/// The default value is the width and height of the Silverlight plug-in, as specified by the HTML object element that instantiated it.</returns>
 		public Size ScreenResolution { get; private set; }
 
-		// TODO: Add System.Environment.OSVersion
+		// TODO: Add System.Environment.OsVersion
 
 		/// <summary>Screen resolution can only be found after Resized-event on app.</summary>
 		public void Load()

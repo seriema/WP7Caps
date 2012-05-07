@@ -49,6 +49,7 @@
 							Text="{Binding Name}"
 							Margin="0,0,0,12"
 							VerticalAlignment="Center" />
+						
 						<TextBlock
 							Text="Manufacturer:"
 							VerticalAlignment="Center" />
@@ -56,6 +57,15 @@
 							Text="{Binding Manufacturer}"
 							Margin="0,0,0,12"
 							VerticalAlignment="Center" />
+						
+						<TextBlock
+							Text="OS Version:"
+							VerticalAlignment="Center" />
+						<TextBlock
+							Text="{Binding OsVersion}"
+							Margin="0,0,0,12"
+							VerticalAlignment="Center" />
+						
 						<TextBlock
 							Text="Hardware Version:"
 							VerticalAlignment="Center" />
@@ -63,6 +73,7 @@
 							Text="{Binding HardwareVersion}"
 							Margin="0,0,0,12"
 							VerticalAlignment="Center" />
+						
 						<TextBlock
 							Text="Firmware Version:"
 							VerticalAlignment="Center" />
@@ -70,6 +81,7 @@
 							Text="{Binding FirmwareVersion}"
 							Margin="0,0,0,12"
 							VerticalAlignment="Center" />
+						
 						<TextBlock
 							Text="Total Memory:"
 							VerticalAlignment="Center" />
@@ -77,6 +89,7 @@
 							Text="{Binding TotalMemory}"
 							Margin="0,0,0,12"
 							VerticalAlignment="Center" />
+						
 						<TextBlock
 							Text="Screen Resolution:"
 							VerticalAlignment="Center" />
@@ -84,6 +97,7 @@
 							Text="{Binding ScreenResolution}"
 							Margin="0,0,0,12"
 							VerticalAlignment="Center" />
+						
 						<TextBlock
 							Text="Physical Keyboard:"
 							VerticalAlignment="Center" />
@@ -91,6 +105,7 @@
 							Text="{Binding HasKeyboard}"
 							Margin="0,0,0,12"
 							VerticalAlignment="Center" />
+						
 						<TextBlock
 							Text="PowerSource:"
 							VerticalAlignment="Center" />

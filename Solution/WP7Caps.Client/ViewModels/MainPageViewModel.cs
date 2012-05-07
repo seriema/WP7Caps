@@ -53,6 +53,7 @@ namespace WinPhoneCaps.Client.ViewModels
 			data.AppendLine("[Information]");
 			data.AppendLine("Device name: " + device.Name);
 			data.AppendLine("Manufacturer: " + device.Manufacturer);
+			data.AppendLine("OS Version: " + device.OsVersion);
 			data.AppendLine("Hardware version: " + device.HardwareVersion);
 			data.AppendLine("Firmware version: " + device.FirmwareVersion);
 			data.AppendLine("Total memory: " + device.TotalMemory);
