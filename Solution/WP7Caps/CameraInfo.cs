@@ -11,11 +11,12 @@ namespace WinPhoneCaps
 		PhotoCamera camera;
 		Dispatcher uiThread;
 
-		public static bool IsFrontFacingCameraSupported { get { return Camera.IsCameraTypeSupported(CameraType.FrontFacing); } }
+		public static bool HasPrimaryCamera { get { return Camera.IsCameraTypeSupported(CameraType.Primary); } }
+		public static bool HasFrontFacingCamera { get { return Camera.IsCameraTypeSupported(CameraType.FrontFacing); } }
 
 		public Size CurrentCameraResolution { get; private set; }
-		public bool IsFocusAtPointSupported { get; private set; }
-		public bool IsFocusSupported { get; private set; }
+		public bool HasFocusAtPoint { get; private set; }
+		public bool HasFocus { get; private set; }
 		public YCbCrPixelLayout PhotoPixelLayout { get; private set; }
 		public IEnumerable<Size> SupportedResolutions { get; private set; }
 
@@ -31,16 +32,16 @@ namespace WinPhoneCaps
 		void CollectCameraCaps(object sender, CameraOperationCompletedEventArgs e)
 		{
 			CurrentCameraResolution = camera.Resolution;
-			IsFocusAtPointSupported = camera.IsFocusAtPointSupported;
-			IsFocusSupported = camera.IsFocusSupported;
+			HasFocusAtPoint = camera.IsFocusAtPointSupported;
+			HasFocus = camera.IsFocusSupported;
 			PhotoPixelLayout = camera.YCbCrPixelLayout;
 			SupportedResolutions = camera.AvailableResolutions;
 
 			uiThread.BeginInvoke( () =>
 			{
 				RaisePropertyChanged("CurrentCameraResolution");
-				RaisePropertyChanged("IsFocusAtPointSupported");
-				RaisePropertyChanged("IsFocusSupported");
+				RaisePropertyChanged("HasFocusAtPoint");
+				RaisePropertyChanged("HasFocus");
 				RaisePropertyChanged("PhotoPixelLayout");
 				RaisePropertyChanged("SupportedResolutions");
 			});

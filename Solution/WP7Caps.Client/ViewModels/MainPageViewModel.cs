@@ -64,7 +64,7 @@ namespace WinPhoneCaps.Client.ViewModels
 
 			var net = NetworkInfo;
 			data.AppendLine("[Network]");
-			data.AppendLine("Connected to network: " + net.IsConnected);
+			data.AppendLine("Network available: " + net.IsNetworkAvailable);
 			data.AppendLine("Connection type: " + net.ConnectionType);
 			data.AppendLine("Mobile operator: " + net.MobileOperator);
 			data.AppendLine("Cellular data connection enabled: " + net.IsCellularDataEnabled);

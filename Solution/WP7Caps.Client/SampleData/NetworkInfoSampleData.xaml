@@ -3,7 +3,7 @@
 
 	ConnectionType="Telekenetic"
 	IsCellularDataRoamingEnabled="False"
-	IsConnected="True"
+	IsNetworkAvailable="True"
 	IsWifiEnabled="False"
 	IsCellularDataEnabled="True"
 	MobileOperator="Maecenas nam sed"/>

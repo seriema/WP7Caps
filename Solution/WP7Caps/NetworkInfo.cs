@@ -23,7 +23,7 @@ namespace WinPhoneCaps
 		/// <summary>Gets a value that indicates whether the network is available.</summary>
 		/// <returns>true if there is at least one network interface available; otherwise, false.</returns>
 		/// <remarks>The network interface must be available and connected.</remarks>
-		public static bool IsConnected { get { return DeviceNetworkInformation.IsNetworkAvailable; } }
+		public static bool IsNetworkAvailable { get { return DeviceNetworkInformation.IsNetworkAvailable; } }
 
 		/// <summary>Gets a value that indicates whether the network is Wi-Fi enabled.</summary>
 		/// <returns>true if the network is Wi-Fi enabled; otherwise, false.</returns>

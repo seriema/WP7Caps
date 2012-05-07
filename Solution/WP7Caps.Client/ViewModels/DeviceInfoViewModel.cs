@@ -6,6 +6,14 @@ namespace WinPhoneCaps.Client.ViewModels
 	{
 		public DeviceInfoViewModel()
 		{
+			FirmwareVersion = DeviceInfo.FirmwareVersion;
+			HardwareVersion = DeviceInfo.HardwareVersion;
+			HasKeyboard = DeviceInfo.HasKeyboard;
+			Manufacturer = DeviceInfo.Manufacturer;
+			Name = DeviceInfo.Name;
+			OsVersion = DeviceInfo.OsVersion.ToString();
+			PowerSource = DeviceInfo.PowerSource.ToString();
+			TotalMemory = string.Format(CultureInfo.InvariantCulture, "{0} MB", BytesAsMegaBytes(DeviceInfo.TotalMemory));
 		}
 
 		public string FirmwareVersion { get; private set; }
@@ -23,25 +31,9 @@ namespace WinPhoneCaps.Client.ViewModels
 			var device = new DeviceInfo();
 			device.Load();
 
-			FirmwareVersion = DeviceInfo.FirmwareVersion;
-			HardwareVersion = DeviceInfo.HardwareVersion;
-			HasKeyboard = DeviceInfo.HasKeyboard;
-			Manufacturer = DeviceInfo.Manufacturer;
-			Name = DeviceInfo.Name;
-			OsVersion = DeviceInfo.OsVersion.ToString();
-			PowerSource = DeviceInfo.PowerSource.ToString();
 			ScreenResolution = string.Format(CultureInfo.InvariantCulture, "{0}x{1}", device.ScreenResolution.Width, device.ScreenResolution.Height);
-			TotalMemory = string.Format(CultureInfo.InvariantCulture, "{0} MB", BytesAsMegaBytes(DeviceInfo.TotalMemory));
 
-			RaisePropertyChanged("FirmwareVersion");
-			RaisePropertyChanged("HardwareVersion");
-			RaisePropertyChanged("HasKeyboard");
-			RaisePropertyChanged("Manufacturer");
-			RaisePropertyChanged("Name");
-			RaisePropertyChanged("OsVersion");
-			RaisePropertyChanged("PowerSource");
 			RaisePropertyChanged("ScreenResolution");
-			RaisePropertyChanged("TotalMemory");
 		}
 
 		private static long BytesAsMegaBytes(long bytes)

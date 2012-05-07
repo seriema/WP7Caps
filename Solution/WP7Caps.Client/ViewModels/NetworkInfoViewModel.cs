@@ -6,10 +6,10 @@ namespace WinPhoneCaps.Client.ViewModels
 	{
 		public NetworkInfoViewModel()
 		{
-			ConnectionType = GetInterfaceTypeString(NetworkInfo.ConnectionType);
+			ConnectionType = InterfaceTypeToString(NetworkInfo.ConnectionType);
 			IsCellularDataEnabled = NetworkInfo.IsCellularDataEnabled;
 			IsCellularDataRoamingEnabled = NetworkInfo.IsCellularDataRoamingEnabled;
-			IsConnected = NetworkInfo.IsConnected;
+			IsNetworkAvailable = NetworkInfo.IsNetworkAvailable;
 			IsWifiEnabled = NetworkInfo.IsWifiEnabled;
 			MobileOperator = NetworkInfo.MobileOperator;
 			if (string.IsNullOrEmpty(MobileOperator))
@@ -19,7 +19,7 @@ namespace WinPhoneCaps.Client.ViewModels
 		public string ConnectionType { get; private set; }
 		public bool IsCellularDataEnabled { get; private set; }
 		public bool IsCellularDataRoamingEnabled { get; private set; }
-		public bool IsConnected { get; private set; }
+		public bool IsNetworkAvailable { get; private set; }
 		public bool IsWifiEnabled { get; private set; }
 		public string MobileOperator { get; private set; }
 
@@ -27,7 +27,7 @@ namespace WinPhoneCaps.Client.ViewModels
 		{
 		}
 
-		private static string GetInterfaceTypeString(NetworkInterfaceType networkInterfaceType)
+		private static string InterfaceTypeToString(NetworkInterfaceType networkInterfaceType)
 		{
 			switch (networkInterfaceType)
 			{

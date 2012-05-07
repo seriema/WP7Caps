@@ -24,12 +24,12 @@ namespace WinPhoneCaps.Client.ViewModels
 			var cam = new CameraInfo();
 			cam.Load(uiThread);
 
-			IsFrontFacingCameraSupported = CameraInfo.IsFrontFacingCameraSupported;
+			IsFrontFacingCameraSupported = CameraInfo.HasFrontFacingCamera;
 
 			// Have to wait for event to kick off
 			SupportedResolutions = GetSupportedResolutions(cam.SupportedResolutions);
-			IsFocusAtPointSupported = cam.IsFocusAtPointSupported;
-			IsFocusSupported = cam.IsFocusSupported;
+			IsFocusAtPointSupported = cam.HasFocusAtPoint;
+			IsFocusSupported = cam.HasFocus;
 			CurrentCameraResolution = SizeAsString(cam.CurrentCameraResolution);
 			PhotoPixelLayout = GetPixelLayoutStrings(cam.PhotoPixelLayout);
 		}
