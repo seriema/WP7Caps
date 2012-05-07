@@ -4,10 +4,15 @@ using System.Windows.Threading;
 
 namespace WinPhoneCaps.Client.ViewModels
 {
-	public class ComponentsInfoViewModel
+	public class ComponentsInfoViewModel : NotifyPropertyChangedBase
 	{
 		public ComponentsInfoViewModel()
 		{
+			IsAccelerometerSupported = ComponentsInfo.IsAccelerometerSupported;
+			IsCompassSupported = ComponentsInfo.IsCompassSupported;
+			IsGyroSupported = ComponentsInfo.IsGyroSupported;
+			IsMotionSupported = ComponentsInfo.IsMotionSupported;
+			IsMultiResolutionVideoSupported = ComponentsInfo.IsMultiResolutionVideoSupported;
 		}
 
 		public IEnumerable<string> LocationData { get; private set; }
@@ -19,16 +24,10 @@ namespace WinPhoneCaps.Client.ViewModels
 
 		public void Load(Dispatcher uiThread)
 		{
-			IsAccelerometerSupported = ComponentsInfo.IsAccelerometerSupported;
-			IsCompassSupported = ComponentsInfo.IsCompassSupported;
-			IsGyroSupported = ComponentsInfo.IsGyroSupported;
-			IsMotionSupported = ComponentsInfo.IsMotionSupported;
-			IsMultiResolutionVideoSupported = ComponentsInfo.IsMultiResolutionVideoSupported;
-
 			var comp = new ComponentsInfo();
-			comp.Load(uiThread);
-			// Have to wait for event to kick off
+			comp.Load();
 			LocationData = GetLocationStrings(comp.LocationData);
+			RaisePropertyChanged("LocationData");
 		}
 
 		private static string DoubleAsFriendlyString(double d)

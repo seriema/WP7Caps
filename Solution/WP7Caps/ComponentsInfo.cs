@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Device.Location;
-using System.Windows.Threading;
 using Microsoft.Devices.Sensors;
 using Microsoft.Phone.Info;
 
 namespace WinPhoneCaps
 {
-	public class ComponentsInfo : NotifyPropertyChangedBase
+	public class ComponentsInfo
 	{
-		Dispatcher uiThread;
 		GeoCoordinateWatcher watcher;
 
 		public ComponentsInfo()
@@ -36,10 +34,8 @@ namespace WinPhoneCaps
 			public double Speed { get; set; }
 		}
 
-		public void Load(Dispatcher uiThread)
+		public void Load()
 		{
-			this.uiThread = uiThread;
-
 			SetLocationData();
 		}
 
@@ -50,14 +46,11 @@ namespace WinPhoneCaps
 			if (watcher.Permission == GeoPositionPermission.Denied)
 			{
 				LocationData = new Location { HasPermission = false };
-				RaisePropertyChanged("LocationData");
 				return false;
 			}
 
 			watcher.MovementThreshold = 0;
-			watcher.TryStart(false, TimeSpan.FromMilliseconds(1000));
-
-			return true;
+			return watcher.TryStart(false, TimeSpan.FromMilliseconds(1000));
 		}
 
 		void SetLocationData()
@@ -75,19 +68,18 @@ namespace WinPhoneCaps
 				Longitude = watcher.Position.Location.Longitude,
 				Speed = watcher.Position.Location.Speed
 			};
-			uiThread.BeginInvoke(() => RaisePropertyChanged("LocationData"));
 
 			UninitializeGeoCoordinateWatcher();
 		}
 
 		void UninitializeGeoCoordinateWatcher()
 		{
-			if (watcher != null)
-			{
-				watcher.Stop();
-				watcher.Dispose();
-				watcher = null;
-			}
+			if (watcher == null)
+				return;
+
+			watcher.Stop();
+			watcher.Dispose();
+			watcher = null;
 		}
 	}
 }
