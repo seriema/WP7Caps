@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Linq;
 using System.Windows;
-using System.Windows.Threading;
 using Microsoft.Devices;
 
 namespace WinPhoneCaps.Client.ViewModels
