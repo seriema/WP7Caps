@@ -24,6 +24,7 @@ namespace WinPhoneCaps.Client.ViewModels
 		// TODO: Is there a way to get rid of the Dispatcher?
 		public void Load(Dispatcher uiThread)
 		{
+			CameraInfo.Load(uiThread);
 			ComponentsInfo.Load(uiThread);
 			DeviceInfo.Load();
 			NetworkInfo.Load();
@@ -31,15 +32,18 @@ namespace WinPhoneCaps.Client.ViewModels
 		
 		public void EmailData()
 		{
-			var email = new EmailComposeTask();
-			email.Subject = "Device data about my WP7 phone";
-			email.Body = PhoneDataToString();
+			var email = new EmailComposeTask
+			{
+			    Subject = "Device data about my WP7 phone", 
+				Body = PhoneDataToString()
+			};
+
 			email.Show();
 		}
 
 		private static string StringCollectionToString(IEnumerable<string> collection)
 		{
-			if (collection == null || collection.Count() == 0)
+			if (collection == null || !collection.Any())
 				return "No data";
 
 			return string.Join(", ", collection);

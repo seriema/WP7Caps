@@ -8,7 +8,6 @@ namespace WinPhoneCaps
 {
 	public class CameraInfo : NotifyPropertyChangedBase
 	{
-		PhotoCamera camera;
 		Dispatcher uiThread;
 
 		public static bool HasPrimaryCamera { get { return Camera.IsCameraTypeSupported(CameraType.Primary); } }
@@ -31,46 +30,57 @@ namespace WinPhoneCaps
 
 		void CollectCameraCaps(object sender, CameraOperationCompletedEventArgs e)
 		{
-			CurrentCameraResolution = camera.Resolution;
-			HasFocusAtPoint = camera.IsFocusAtPointSupported;
-			HasFocus = camera.IsFocusSupported;
-			PhotoPixelLayout = camera.YCbCrPixelLayout;
-			SupportedResolutions = camera.AvailableResolutions;
+			var camera = sender as PhotoCamera;
+			if (camera == null)
+				return;
 
-			uiThread.BeginInvoke( () =>
+			if (camera.CameraType == CameraType.Primary)
 			{
-				RaisePropertyChanged("CurrentCameraResolution");
-				RaisePropertyChanged("HasFocusAtPoint");
-				RaisePropertyChanged("HasFocus");
-				RaisePropertyChanged("PhotoPixelLayout");
-				RaisePropertyChanged("SupportedResolutions");
-			});
+				CurrentCameraResolution = camera.Resolution;
+				HasFocusAtPoint = camera.IsFocusAtPointSupported;
+				HasFocus = camera.IsFocusSupported;
+				PhotoPixelLayout = camera.YCbCrPixelLayout;
+				SupportedResolutions = camera.AvailableResolutions;
 
-			UninitializeCamera();
+				uiThread.BeginInvoke(() =>
+				{
+				    RaisePropertyChanged("CurrentCameraResolution");
+				    RaisePropertyChanged("HasFocusAtPoint");
+				    RaisePropertyChanged("HasFocus");
+				    RaisePropertyChanged("PhotoPixelLayout");
+				    RaisePropertyChanged("SupportedResolutions");
+				});
+			}
+
+			UninitializeCamera(camera);
 		}
 
-		void InitializeCamera()
+		void InitializeCamera(CameraType cameraType)
 		{
 			// Camera resolution data gathering requires the camera to be initialized
-			camera = new PhotoCamera(CameraType.Primary);
+			var camera = new PhotoCamera(cameraType);
 			camera.Initialized += CollectCameraCaps;
+			var dummyRectangle = new System.Windows.Shapes.Rectangle();
 			var dummyBrush = new VideoBrush();
+			dummyRectangle.Fill = dummyBrush;
 			dummyBrush.SetSource(camera); // Needed for the camera.Initialized event to fire.
 		}
 
 		void SetCameraData()
 		{
-			InitializeCamera();
+			if(HasPrimaryCamera)
+				InitializeCamera(CameraType.Primary);
+			//if(HasFrontFacingCamera)
+			//    InitializeCamera(CameraType.FrontFacing);
 		}
 
-		void UninitializeCamera()
+		void UninitializeCamera(PhotoCamera camera)
 		{
 			if (camera == null)
 				return;
 
 			camera.Initialized -= CollectCameraCaps;
 			camera.Dispose();
-			camera = null;
 		}
 	}
 }

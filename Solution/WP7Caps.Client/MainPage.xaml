@@ -309,6 +309,13 @@
 							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 
+						<Rectangle Visibility="Collapsed">
+							<Rectangle.Fill>
+								<VideoBrush
+									x:Name="DummyBrush" />
+							</Rectangle.Fill>
+						</Rectangle>
+
 						<TextBlock
 							Text="Front Facing Camera Support:"
 							Grid.Row="0"
