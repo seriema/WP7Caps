@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Threading;
 using Microsoft.Devices;
 
 namespace WinPhoneCaps
 {
-	public class CameraInfo : NotifyPropertyChangedBase
+	public class CameraInfo
 	{
-		Dispatcher uiThread;
-
 		public static bool HasPrimaryCamera { get { return Camera.IsCameraTypeSupported(CameraType.Primary); } }
 		public static bool HasFrontFacingCamera { get { return Camera.IsCameraTypeSupported(CameraType.FrontFacing); } }
 
@@ -23,10 +19,8 @@ namespace WinPhoneCaps
 
 		// TODO: Do a IsStandardCameraSupported
 
-		public void Load(Dispatcher uiThread)
+		public void Load()
 		{
-			this.uiThread = uiThread;
-
 			SetCameraData();
 		}
 
@@ -43,15 +37,6 @@ namespace WinPhoneCaps
 				HasFocus = camera.IsFocusSupported;
 				PhotoPixelLayout = camera.YCbCrPixelLayout;
 				SupportedResolutions = camera.AvailableResolutions;
-
-				uiThread.BeginInvoke(() =>
-				{
-				    RaisePropertyChanged("CurrentCameraResolution");
-				    RaisePropertyChanged("HasFocusAtPoint");
-				    RaisePropertyChanged("HasFocus");
-				    RaisePropertyChanged("PhotoPixelLayout");
-				    RaisePropertyChanged("SupportedResolutions");
-				});
 			}
 
 			UninitializeCamera(camera);

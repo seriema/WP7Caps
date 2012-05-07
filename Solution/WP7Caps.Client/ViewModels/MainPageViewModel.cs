@@ -24,7 +24,7 @@ namespace WinPhoneCaps.Client.ViewModels
 		// TODO: Is there a way to get rid of the Dispatcher?
 		public void Load(Dispatcher uiThread)
 		{
-			CameraInfo.Load(uiThread);
+			CameraInfo.Load();
 			ComponentsInfo.Load(uiThread);
 			DeviceInfo.Load();
 			NetworkInfo.Load();

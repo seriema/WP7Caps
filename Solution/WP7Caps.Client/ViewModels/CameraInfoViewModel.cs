@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Devices;
@@ -10,8 +9,6 @@ namespace WinPhoneCaps.Client.ViewModels
 {
 	public class CameraInfoViewModel : NotifyPropertyChangedBase
 	{
-		private Dispatcher uiThread;
-
 		public CameraInfoViewModel()
 		{
 			IsFrontFacingCameraSupported = CameraInfo.HasFrontFacingCamera;
@@ -26,12 +23,10 @@ namespace WinPhoneCaps.Client.ViewModels
 		public IEnumerable<string> SupportedResolutions { get; private set; }
 		public IEnumerable<string> PhotoPixelLayout { get; private set; }
 
-		public void Load(Dispatcher uiThread)
+		public void Load()
 		{
-			this.uiThread = uiThread;
-
 			var cam = new CameraInfo();
-			cam.Load(uiThread);
+			cam.Load();
 			CurrentCameraResolution = SizeToString(cam.CurrentCameraResolution);
 			IsFocusAtPointSupported = cam.HasFocusAtPoint;
 			IsFocusSupported = cam.HasFocus;
