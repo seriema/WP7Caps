@@ -32,8 +32,6 @@ namespace WinPhoneCaps.Client.ViewModels
 
 			var cam = new CameraInfo();
 			cam.Load(uiThread);
-			// Have to wait for event to kick off
-			Thread.Sleep(500);
 			CurrentCameraResolution = SizeToString(cam.CurrentCameraResolution);
 			IsFocusAtPointSupported = cam.HasFocusAtPoint;
 			IsFocusSupported = cam.HasFocus;

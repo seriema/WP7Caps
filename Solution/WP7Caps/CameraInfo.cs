@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -59,11 +61,25 @@ namespace WinPhoneCaps
 		{
 			// Camera resolution data gathering requires the camera to be initialized
 			var camera = new PhotoCamera(cameraType);
-			camera.Initialized += CollectCameraCaps;
-			var dummyRectangle = new System.Windows.Shapes.Rectangle();
-			var dummyBrush = new VideoBrush();
-			dummyRectangle.Fill = dummyBrush;
-			dummyBrush.SetSource(camera); // Needed for the camera.Initialized event to fire.
+			using (var mutex = new ManualResetEvent(false))
+			{
+				camera.Initialized += (sender, e) =>
+				{
+				    try
+				    {
+				        CollectCameraCaps(sender, e);
+				    }
+				    finally
+				    {
+				        mutex.Set();
+				    }
+				};
+
+				var dummyBrush = new VideoBrush();
+				dummyBrush.SetSource(camera); // Needed for the camera.Initialized event to fire.
+
+				mutex.WaitOne();
+			}
 		}
 
 		void SetCameraData()
